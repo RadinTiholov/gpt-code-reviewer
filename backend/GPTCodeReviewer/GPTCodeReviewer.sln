@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FF08E158-84C0-41AC-9180-47F3B8A0196C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{ED605932-0B4F-4EF1-A44F-1084A349841C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BC061F36-20BE-4033-98FF-01A53C3C54DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E9CE043E-C7A6-48D3-AE8E-089039E0E610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPTCodeReviewer.Web", "GPTCodeReviewer.Web\GPTCodeReviewer.Web.csproj", "{BBC33C22-138D-49A6-81AB-5DB184DBB428}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBC33C22-138D-49A6-81AB-5DB184DBB428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC33C22-138D-49A6-81AB-5DB184DBB428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC33C22-138D-49A6-81AB-5DB184DBB428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC33C22-138D-49A6-81AB-5DB184DBB428}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBC33C22-138D-49A6-81AB-5DB184DBB428} = {FF08E158-84C0-41AC-9180-47F3B8A0196C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E091F2A-9801-4596-BBA9-754CD483BA7F}
+	EndGlobalSection
+EndGlobal
