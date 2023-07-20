@@ -4,7 +4,7 @@ namespace GPTCodeReviewer.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HomeController : ControllerBase
+    public class HomeController : ApiController
     {
         //[Authorize]
         public async Task<IActionResult> Get()

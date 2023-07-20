@@ -1,8 +1,8 @@
-﻿using GPTCodeReviewer.Web.Data.Models;
+﻿using GPTCodeReviewer.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GPTCodeReviewer.Web.Data
+namespace GPTCodeReviewer.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

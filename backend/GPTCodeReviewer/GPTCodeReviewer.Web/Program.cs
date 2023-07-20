@@ -1,11 +1,12 @@
 using GPTCodeReviewer.Web;
-using GPTCodeReviewer.Web.Data;
-using GPTCodeReviewer.Web.Data.Models;
+using GPTCodeReviewer.Data;
+using GPTCodeReviewer.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using GPTCodeReviewer.Web.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -79,5 +80,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.ApplyMigration();
 
 app.Run();

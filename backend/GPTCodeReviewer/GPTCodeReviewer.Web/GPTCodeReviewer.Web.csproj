@@ -15,4 +15,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GPTCodeReviewer.Data\GPTCodeReviewer.Data.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Web.Infrastructure\GPTCodeReviewer.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj" />
+  </ItemGroup>
+
 </Project>
