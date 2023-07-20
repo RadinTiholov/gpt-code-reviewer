@@ -1,5 +1,6 @@
 ﻿using GPTCodeReviewer.Data.Models;
 using GPTCodeReviewer.Web.Models.Request;
+using GPTCodeReviewer.Web.Models.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -34,14 +35,14 @@ namespace GPTCodeReviewer.Web.Controllers
 
             if (result.Succeeded)
             {
-                return Ok();
+                this.Ok();
             }
 
             return BadRequest(result.Errors);
         }
 
         [Route(nameof(Login))]
-        public async Task<ActionResult<string>> Login(LoginInputModel model)
+        public async Task<ActionResult<LoginResponseModel>> Login(LoginInputModel model)
         {
             var user = await this.userManager.FindByNameAsync(model.Username);
 
@@ -73,7 +74,13 @@ namespace GPTCodeReviewer.Web.Controllers
 
             var encriptedToken = tokenHandler.WriteToken(token);
 
-            return encriptedToken;
+            return new LoginResponseModel()
+            {
+                AccessToken = encriptedToken,
+                Username = user.UserName,
+                Email = user.Email,
+                Id = user.Id
+            };
         }
     }
 }
