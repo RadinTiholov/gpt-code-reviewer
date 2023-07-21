@@ -1,19 +1,19 @@
 import { useState } from "react";
 import * as identityService from "../../dataServices/identityService";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess, loginFailure } from "../../actions/authActions"
 
 export const Login = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { error } = useSelector((state) => state.auth);
 
     const [inputData, setInputData] = useState({
         username: "",
         email: "",
         password: ""
-    });
-
-    const [error, setError] = useState({
-        active: false, message: ""
     });
 
     const onChange = (e) => {
@@ -26,11 +26,15 @@ export const Login = () => {
 
         identityService.login(inputData)
             .then(res => {
-                console.log(res)
+
+                // Save user state to Redux store
+                dispatch(loginSuccess(res));
+
                 navigate('/')
             })
             .catch(res => {
-                setError({ active: true, message: res.message })
+                // Save error state to Redux store
+                dispatch(loginFailure(res.message));
             })
     }
 
@@ -51,11 +55,11 @@ export const Login = () => {
                 onChange={onChange}
             />
             <br />
-            {error?.active ? 
-            <p>
-                Error!
-            </p>
-            : <></>}
+            {error ?
+                <p>
+                    Error!
+                </p>
+                : <></>}
             <button type="submit">Login</button>
         </form>
     )
