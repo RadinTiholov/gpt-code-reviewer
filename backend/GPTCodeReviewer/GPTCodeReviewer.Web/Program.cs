@@ -70,10 +70,9 @@ else
 app.UseRouting();
 
 app.UseCors(options => options
+    .AllowAnyOrigin()
     .AllowAnyHeader()
-    .AllowAnyMethod()
-    .SetIsOriginAllowed((x) => true)
-    .AllowCredentials());
+    .AllowAnyMethod());
 
 app.UseAuthentication();
 app.UseAuthorization();
