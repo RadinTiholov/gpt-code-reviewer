@@ -35,7 +35,7 @@ namespace GPTCodeReviewer.Web.Controllers
 
             if (result.Succeeded)
             {
-                this.Ok();
+                return this.Ok();
             }
 
             return BadRequest(result.Errors);
