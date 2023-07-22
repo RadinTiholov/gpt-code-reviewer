@@ -17,14 +17,14 @@ Paragraph: 1.6
 - Pack: #3aafa9 / #17252a / #2b7a78 / #def2f1 / #feffff
 - Tints: 
 - Shades: 
-- Accents: 
+- Accents: #AF3A40
 - Greys: 
 
 --- 03 SHADOWS
-
+- Header - box-shadow: 143px 0px 400px -36px rgba(59, 176, 170, 0.445);
 
 --- 04 BORDER-RADIUS
-
+- 12px
 
 --- 05 WHITESPACE (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
@@ -44,14 +44,23 @@ Paragraph: 1.6
 html {
     font-size: 62.5%;
     overflow-x: hidden;
+    background-color: #17252a;
+}
+
+.main-section {
+    margin-left: 100px;
 }
 
 body {
     font-family: 'Rubik', sans-serif;
     line-height: 1;
     font-weight: 400;
-    color: #555;
+    color: #feffff;
 
     /*Only works if there is nothing aboslutely positoined in relation to body*/
     overflow-x: hidden;
+}
+
+li {
+    list-style: none;
 }
