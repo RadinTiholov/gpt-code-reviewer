@@ -1,4 +1,3 @@
-using GPTCodeReviewer.Web;
 using GPTCodeReviewer.Data;
 using GPTCodeReviewer.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GPTCodeReviewer.Web.Infrastructure.Extensions;
+using GPTCodeReviewer.Services.Contracts;
+using GPTCodeReviewer.Services;
+using GPTCodeReviewer.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +33,13 @@ var applicationSettingsConfiguration = builder.Configuration.GetSection("Applica
 builder.Services.Configure<ApplicationSettings>(applicationSettingsConfiguration);
 
 var appSettings = applicationSettingsConfiguration.Get<ApplicationSettings>();
-var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+var jwtKey = Encoding.ASCII.GetBytes(appSettings.Secret);
+var openAIKey = appSettings.OpenAIKey;
+
+Console.WriteLine($"jwtKey: {jwtKey}");
+Console.WriteLine($"openAIKey: {openAIKey}");
+
+builder.Services.AddTransient<IGPTService>(x => new GPTService(openAIKey));
 
 builder.Services.
     AddAuthentication(x =>
@@ -46,7 +54,7 @@ builder.Services.
         x.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
+            IssuerSigningKey = new SymmetricSecurityKey(jwtKey),
             ValidateIssuer = false,
             ValidateAudience = false,
         };

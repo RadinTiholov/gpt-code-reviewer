@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GPTCodeReviewer.Data\GPTCodeReviewer.Data.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Services\GPTCodeReviewer.Services.csproj" />
     <ProjectReference Include="..\GPTCodeReviewer.Web.Infrastructure\GPTCodeReviewer.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj" />
   </ItemGroup>
