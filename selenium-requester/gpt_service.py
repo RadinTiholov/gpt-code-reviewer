@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
+import json
 
 def initialize_driver():
     # Initialize the WebDriver
@@ -22,9 +23,14 @@ def open_new_chat(driver):
 def review_code_gpt3(driver, question, code):
     print("Reviewing code")
 
-    formated_question = question + "Code: " + code + "Please return only the requested JSON format, nothing more!"
+    formated_question = question + "Code: " + code + ". PLEASE RETURN *ONLY* the requested JSON format, NOTHING more! Do not provide anything additional."
 
-    return ask_gpt3_question(driver, formated_question)
+    response_json = ask_gpt3_question(driver, formated_question)
+
+    parsed_json = json.loads(response_json)
+
+    # Returning the parsed JSON dictionary without backslashes
+    return json.dumps(parsed_json, indent=2)
 
 def ask_gpt3_question(driver, question):
     print("Waiting for response...")
