@@ -107,3 +107,10 @@ li {
     font-size: 3rem;
     color: #feffff;
 }
+
+.error-message {
+    font-size: 3.6rem;
+    margin-top: 1.6rem;
+    color: #AF3A40;
+    align-self: center;
+}

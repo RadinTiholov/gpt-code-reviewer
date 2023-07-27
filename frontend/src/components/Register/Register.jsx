@@ -69,12 +69,12 @@ export const Register = () => {
                     onChange={onChange}
                 />
                 <br />
+                <button className={cx('btn', 'btn--large')} type="submit">Register</button>
                 {error?.active ?
-                    <p>
+                    <p className={cx('error-message')}>
                         Error!
                     </p>
                     : <></>}
-                <button className={cx('btn', 'btn--large')} type="submit">Register</button>
             </form>
         </section>
     )

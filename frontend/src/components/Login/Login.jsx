@@ -65,12 +65,12 @@ export const Login = () => {
                     onChange={onChange}
                 />
                 <br />
+                <button className={cx('btn', 'btn--large')} type="submit">Login</button>
                 {error?.active ?
-                    <p>
+                    <p className={cx('error-message')}>
                         Error!
                     </p>
                     : <></>}
-                <button className={cx('btn', 'btn--large')} type="submit">Login</button>
             </form>
         </section>
     )
