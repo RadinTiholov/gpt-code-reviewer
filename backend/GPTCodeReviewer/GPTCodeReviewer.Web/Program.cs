@@ -9,6 +9,7 @@ using GPTCodeReviewer.Web.Infrastructure.Extensions;
 using GPTCodeReviewer.Services.Contracts;
 using GPTCodeReviewer.Services;
 using GPTCodeReviewer.Web;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +58,11 @@ builder.Services.
         };
     });
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo() { Title = "GptCodeReviewer Api", Version = "v1" });
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -71,6 +77,14 @@ else
 
     app.UseHsts();
 }
+
+app
+    .UseSwagger()
+    .UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "GptCodeReviewer Api");
+        c.RoutePrefix = String.Empty;
+    });
 
 app.UseRouting();
 

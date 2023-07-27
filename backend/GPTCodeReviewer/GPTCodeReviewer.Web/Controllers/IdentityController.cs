@@ -22,6 +22,7 @@ namespace GPTCodeReviewer.Web.Controllers
             this.appSettings = options.Value;
         }
 
+        [HttpPost]
         [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterInputModel model)
         {
@@ -41,6 +42,7 @@ namespace GPTCodeReviewer.Web.Controllers
             return BadRequest(result.Errors);
         }
 
+        [HttpPost]
         [Route(nameof(Login))]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginInputModel model)
         {

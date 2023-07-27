@@ -15,6 +15,7 @@ namespace GPTCodeReviewer.Web.Controllers
         }
 
         // Test
+        [HttpPost]
         [Route(nameof(AskQuestion))]
         public async Task<IActionResult> AskQuestion()
         {
