@@ -34,12 +34,9 @@ builder.Services.Configure<ApplicationSettings>(applicationSettingsConfiguration
 
 var appSettings = applicationSettingsConfiguration.Get<ApplicationSettings>();
 var jwtKey = Encoding.ASCII.GetBytes(appSettings.Secret);
-var openAIKey = appSettings.OpenAIKey;
 
-Console.WriteLine($"jwtKey: {jwtKey}");
-Console.WriteLine($"openAIKey: {openAIKey}");
 
-builder.Services.AddTransient<IGPTService>(x => new GPTService(openAIKey));
+builder.Services.AddTransient<IGPTService>(x => new GPTService(new GPTCodeReviewer.Web.GPT.Requester()));
 
 builder.Services.
     AddAuthentication(x =>

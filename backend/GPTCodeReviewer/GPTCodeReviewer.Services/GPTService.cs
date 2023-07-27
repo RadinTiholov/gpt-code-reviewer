@@ -5,18 +5,16 @@ namespace GPTCodeReviewer.Services
 {
     public class GPTService : IGPTService
     {
-        private readonly string apiKey;
+        private Requester requester;
 
-        public GPTService(string apiKey)
+        public GPTService(Requester requester)
         {
-            this.apiKey = apiKey;
+            this.requester = requester;
         }
 
         public async Task<string> MakeRequest(string message)
         {
-            var requester = new Requester(this.apiKey);
-
-            return await requester.MakeRequestAsync(message);
+            return await this.requester.MakeRequestAsync(message);
         }
     }
 }

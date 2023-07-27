@@ -1,32 +1,34 @@
-﻿using OpenAI_API;
-using OpenAI_API.Chat;
-using OpenAI_API.Models;
+﻿using GPTCodeReviewer.Web.GPT.Models;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace GPTCodeReviewer.Web.GPT
 {
     public class Requester
     {
-        private OpenAIAPI api;
-
-        public Requester(string key)
+        public async Task<string> MakeRequestAsync(string question)
         {
-            this.api = new OpenAIAPI(key);
-        }
+            string requestUrl = "http://localhost:5000/gpt/ask";
 
-        public async Task<string> MakeRequestAsync(string request)
-        {
-            var result = await api.Chat.CreateChatCompletionAsync(new ChatRequest()
+            using (var httpClient = new HttpClient())
             {
-                Model = Model.ChatGPTTurbo,
-                Temperature = 0.1,
-                Messages = new ChatMessage[] {
-                        new ChatMessage(ChatMessageRole.User, request)
-                    }
-            });
+                // Serialize the data to JSON
+                string jsonContent = JsonConvert.SerializeObject(new QuestionModel() { Question = question });
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var reply = result.Choices[0].Message;
-            return reply.Content.Trim();
+                // Send the POST request and await the response
+                HttpResponseMessage response = await httpClient.PostAsync(requestUrl, httpContent);
+
+                // Check if the response was successful
+                response.EnsureSuccessStatusCode();
+
+                // Read the response content as a string
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine(responseBody);
+
+                return responseBody;
+            }
         }
-
     }
 }

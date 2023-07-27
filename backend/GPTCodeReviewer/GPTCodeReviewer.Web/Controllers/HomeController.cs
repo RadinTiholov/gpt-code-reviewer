@@ -27,7 +27,6 @@ namespace GPTCodeReviewer.Web.Controllers
             }
             catch (Exception)
             {
-
                 return this.BadRequest();
             }
         }
