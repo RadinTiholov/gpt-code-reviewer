@@ -2,6 +2,6 @@
 {
     public class QuestionModel
     {
-        public string Question { get; set; } = null!;
+        public string question { get; set; } = null!;
     }
 }

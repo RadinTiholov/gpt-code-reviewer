@@ -6,29 +6,28 @@ namespace GPTCodeReviewer.Web.GPT
 {
     public class Requester
     {
+        private readonly HttpClient _httpClient;
+        private readonly string _requestUrl;
+
+        public Requester()
+        {
+            _httpClient = new HttpClient();
+            _requestUrl = "http://127.0.0.1:5000/gpt/ask";
+        }
         public async Task<string> MakeRequestAsync(string question)
         {
-            string requestUrl = "http://localhost:5000/gpt/ask";
+            // Serialize the data to JSON
+            string jsonContent = JsonConvert.SerializeObject(new QuestionModel { question = question });
+            var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            using (var httpClient = new HttpClient())
-            {
-                // Serialize the data to JSON
-                string jsonContent = JsonConvert.SerializeObject(new QuestionModel() { Question = question });
-                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            // Send the POST request and await the response
+            HttpResponseMessage response = await _httpClient.PostAsync(_requestUrl, httpContent).ConfigureAwait(false);
 
-                // Send the POST request and await the response
-                HttpResponseMessage response = await httpClient.PostAsync(requestUrl, httpContent);
+            // Check if the response was successful
+            response.EnsureSuccessStatusCode();
 
-                // Check if the response was successful
-                response.EnsureSuccessStatusCode();
-
-                // Read the response content as a string
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                Console.WriteLine(responseBody);
-
-                return responseBody;
-            }
+            // Read the response content as a string
+            return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
     }
 }

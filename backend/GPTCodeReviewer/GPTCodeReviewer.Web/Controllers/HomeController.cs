@@ -14,20 +14,19 @@ namespace GPTCodeReviewer.Web.Controllers
             this.gptService = gptService;
         }
 
-
-        //[Authorize]
-        public async Task<IActionResult> Get()
+        // Test
+        [Route(nameof(AskQuestion))]
+        public async Task<IActionResult> AskQuestion()
         {
             try
             {
-                // Test
-                var response = await gptService.MakeRequest("Can you say hello for me?");
+                var response = await gptService.MakeRequest("Explain me what is Nuclear Fusion?");
 
-                return this.Ok("Works");
+                return this.Ok(response);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return this.BadRequest();
+                return this.BadRequest(ex.Message);
             }
         }
     }
