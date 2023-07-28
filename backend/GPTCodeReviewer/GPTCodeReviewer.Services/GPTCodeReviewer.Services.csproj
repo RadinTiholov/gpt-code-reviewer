@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GPTCodeReviewer.Web.GPT\GPTCodeReviewer.Web.GPT.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>

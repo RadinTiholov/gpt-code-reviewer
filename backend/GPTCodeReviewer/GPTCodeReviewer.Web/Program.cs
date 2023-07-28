@@ -10,6 +10,7 @@ using GPTCodeReviewer.Services.Contracts;
 using GPTCodeReviewer.Services;
 using GPTCodeReviewer.Web;
 using Microsoft.OpenApi.Models;
+using GPTCodeReviewer.Web.GPT;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,7 @@ var appSettings = applicationSettingsConfiguration.Get<ApplicationSettings>();
 var jwtKey = Encoding.ASCII.GetBytes(appSettings.Secret);
 
 
-builder.Services.AddTransient<IGPTService>(x => new GPTService(new GPTCodeReviewer.Web.GPT.Requester()));
+builder.Services.AddTransient<IGPTService>(x => new GPTService(new CodeReviewRequester()));
 
 builder.Services.
     AddAuthentication(x =>
