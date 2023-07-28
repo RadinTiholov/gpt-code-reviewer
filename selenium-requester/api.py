@@ -54,7 +54,7 @@ def review_question():
 
         # Open new chat
         open_new_chat(driver)
-        return jsonify({"response": response})
+        return jsonify(response)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

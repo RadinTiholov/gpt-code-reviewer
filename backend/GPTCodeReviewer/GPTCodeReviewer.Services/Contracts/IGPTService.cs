@@ -1,4 +1,5 @@
 ﻿using GPTCodeReviewer.Web.Models.Request;
+using GPTCodeReviewer.Web.Models.Response;
 
 namespace GPTCodeReviewer.Services.Contracts
 {
@@ -6,6 +7,6 @@ namespace GPTCodeReviewer.Services.Contracts
     {
         Task<string> MakeRequest(string message);
 
-        Task<string> ReviewCode(string code);
+        Task<object> ReviewCode(string code);
     }
 }

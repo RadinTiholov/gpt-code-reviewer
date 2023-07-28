@@ -1,5 +1,6 @@
 ﻿using GPTCodeReviewer.Services.Contracts;
 using GPTCodeReviewer.Web.Models.Request;
+using GPTCodeReviewer.Web.Models.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GPTCodeReviewer.Web.Controllers
@@ -15,21 +16,17 @@ namespace GPTCodeReviewer.Web.Controllers
 
         [HttpPost]
         [Route(nameof(Review))]
-        public async Task<IActionResult> Review(ReviewInputModel model)
+        public async Task<ActionResult<object>> Review(ReviewInputModel model)
         {
             try
             {
-                var response = await gptService.ReviewCode(model.Code);
-
-                // TODO
-                return this.Ok(response);
+                return await gptService.ReviewCode(model.Code);
             }
             catch (Exception ex)
             {
                 return this.BadRequest(ex.Message);
             }
         }
-
 
         [HttpPost]
         [Route(nameof(AskQuestion))]

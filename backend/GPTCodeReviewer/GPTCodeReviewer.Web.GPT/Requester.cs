@@ -1,7 +1,5 @@
 ﻿using GPTCodeReviewer.Web.GPT.Models;
 using Newtonsoft.Json;
-using System.IO;
-using System.Net.Http.Json;
 using System.Text;
 
 namespace GPTCodeReviewer.Web.GPT

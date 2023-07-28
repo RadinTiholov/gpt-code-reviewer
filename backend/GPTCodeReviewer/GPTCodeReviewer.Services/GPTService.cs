@@ -1,5 +1,7 @@
 ﻿using GPTCodeReviewer.Services.Contracts;
 using GPTCodeReviewer.Web.GPT;
+using GPTCodeReviewer.Web.GPT.Models;
+using GPTCodeReviewer.Web.Models.Response;
 using static GPTCodeReviewer.Web.GPT.Queries.GPTQueries;
 
 namespace GPTCodeReviewer.Services
@@ -18,7 +20,7 @@ namespace GPTCodeReviewer.Services
             return await this.requester.AskQuestionAsing(message, "/gpt/ask");
         }
 
-        public async Task<string> ReviewCode(string code)
+        public async Task<object> ReviewCode(string code)
         {
             return await this.requester.ReviewCodeAsync(ReviewCodeQuery, code, "/gpt/review");
         }
