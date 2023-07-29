@@ -1,5 +1,6 @@
 import undetected_chromedriver as uc
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -39,7 +40,14 @@ def ask_gpt3_question(driver, question):
     textarea = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "textarea")))
     textarea.click()
     textarea.send_keys(question)
-    textarea.send_keys(Keys.ENTER)
+
+    button_css_selector = ".absolute.p-1.rounded-md.md\:bottom-3.md\:p-2.md\:right-3.dark\:hover\:bg-gray-900.dark\:disabled\:hover\:bg-transparent.right-2.disabled\:text-gray-400.enabled\:bg-brand-purple.text-white.bottom-1\.5.transition-colors.disabled\:opacity-40"
+    expected_color = "rgb(25, 195, 125)"
+    wait_until_button_has_color_and_click(driver, button_css_selector, expected_color)
+
+    # button = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".absolute.p-1.rounded-md.md\:bottom-3.md\:p-2.md\:right-3.dark\:hover\:bg-gray-900.dark\:disabled\:hover\:bg-transparent.right-2.disabled\:text-gray-400.enabled\:bg-brand-purple.text-white.bottom-1\.5.transition-colors.disabled\:opacity-40")))
+    # textarea.send_keys(Keys.ENTER)
+    # button.click()
     
     # Wait for the response to load (You may need to add an explicit wait here, depending on the website)
     print("Waiting for response from GPT. 30 seconds...")
@@ -59,3 +67,20 @@ def ask_gpt3_question(driver, question):
 
     # Return the concatenated text
     return concatenated_text
+
+def wait_until_button_has_color_and_click(driver, button_css_selector, expected_color, timeout=15):
+    def check_button_color(driver):
+        button = driver.find_element(By.CSS_SELECTOR, button_css_selector)
+        button_bg_color = driver.execute_script("return window.getComputedStyle(arguments[0]).getPropertyValue('background-color');", button)
+        return button_bg_color == expected_color
+
+    try:
+        WebDriverWait(driver, timeout).until(check_button_color)
+        print("Button has the expected background color!")
+
+        # Button has the desired color, click it now
+        button = driver.find_element(By.CSS_SELECTOR, button_css_selector)
+        button.click()
+        print("Button clicked successfully!")
+    except TimeoutException:
+        print("Timed out waiting for the button to have the expected background color.")
