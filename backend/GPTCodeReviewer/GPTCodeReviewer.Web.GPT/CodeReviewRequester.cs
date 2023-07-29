@@ -18,7 +18,7 @@ namespace GPTCodeReviewer.Web.GPT
             // Serialize the data to JSON
             string jsonContent = JsonConvert.SerializeObject(model);
 
-            string jsonResult = await this.MakeRequestAsync(jsonContent, path);
+            string jsonResult = await this.MakePostRequestAsync(jsonContent, path);
 
             object result = JsonConvert.DeserializeObject<object>(jsonResult);
 

@@ -98,6 +98,10 @@ app.UseCors(options => options
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Start GPT authorization process
+var gptService = app.Services.GetRequiredService<IGPTService>();
+await gptService.LoginInGPT();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

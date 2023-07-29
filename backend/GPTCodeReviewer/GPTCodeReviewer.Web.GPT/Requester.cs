@@ -24,15 +24,32 @@ namespace GPTCodeReviewer.Web.GPT
             // Serialize the data to JSON
             string jsonContent = JsonConvert.SerializeObject(model);
 
-            return await this.MakeRequestAsync(jsonContent, path);
+            return await this.MakePostRequestAsync(jsonContent, path);
         }
 
-        public async Task<string> MakeRequestAsync(string jsonContent, string path)
+        public async Task Login(string path)
+        {
+            await this.MakeGetRequestAsync(path);
+        }
+
+        public async Task<string> MakePostRequestAsync(string jsonContent, string path)
         {
             var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
             // Send the POST request and await the response
             HttpResponseMessage response = await this._httpClient.PostAsync(this._requestUrl + path, httpContent).ConfigureAwait(false);
+
+            // Check if the response was successful
+            response.EnsureSuccessStatusCode();
+
+            // Read the response content as a string
+            return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        }
+
+        public async Task<string> MakeGetRequestAsync(string path)
+        {
+            // Send the GET request and await the response
+            HttpResponseMessage response = await this._httpClient.GetAsync(this._requestUrl + path).ConfigureAwait(false);
 
             // Check if the response was successful
             response.EnsureSuccessStatusCode();

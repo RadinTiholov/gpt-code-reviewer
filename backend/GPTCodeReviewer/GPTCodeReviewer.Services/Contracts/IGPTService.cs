@@ -8,5 +8,7 @@ namespace GPTCodeReviewer.Services.Contracts
         Task<string> MakeRequest(string message);
 
         Task<object> ReviewCode(string code);
+
+        Task LoginInGPT();
     }
 }

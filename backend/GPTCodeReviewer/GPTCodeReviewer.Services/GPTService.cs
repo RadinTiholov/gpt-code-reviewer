@@ -24,5 +24,10 @@ namespace GPTCodeReviewer.Services
         {
             return await this.requester.ReviewCodeAsync(ReviewCodeQuery, code, "/gpt/review");
         }
+
+        public async Task LoginInGPT()
+        {
+            await this.requester.Login("/gpt/login");
+        }
     }
 }
