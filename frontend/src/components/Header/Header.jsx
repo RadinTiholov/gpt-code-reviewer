@@ -34,6 +34,10 @@ export const Header = () => {
                     <Link to="/">Home</Link>
                 </li>
                 <li>
+                    <i onClick={openHeader} className={cx('header-icon', 'fa-solid', 'fa-home')}></i>
+                    <Link to="/review">Review</Link>
+                </li>
+                <li>
                     <i onClick={openHeader} className={cx('header-icon', 'fa-solid', 'fa-door-open')}></i>
                     <Link to="/logout">Logout</Link>
                 </li>

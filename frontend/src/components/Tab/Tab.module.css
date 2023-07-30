@@ -1,0 +1,47 @@
+.tab {
+    width: 200px;
+    background-color: #2e3b3f;
+    /* background-color: #17252a; */
+    color: #feffff;
+    height: auto;
+    padding: 1.6rem 1.6rem;
+    /* border: 2px solid #feffff; */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-size: 1.8rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    transition: all 0.5s
+}
+
+.tab:hover {
+    width: 220px;
+    background-color: #455155;
+}
+
+.tab--selected {
+    background-color: #3aafa9;
+}
+
+.tab--selected:hover{
+    background-color: #4eb7b2;
+}
+
+.close-icon {
+    color: #feffff;
+    transition: all 0.3s;
+    margin-left: 0.4rem;
+    font-size: 2rem;
+}
+
+.close-icon:hover {
+    color: #a8abab;
+    transform: scale(1.3);
+}
+
+.tab--selected .close-icon:hover {
+    color: #17252a;
+}
