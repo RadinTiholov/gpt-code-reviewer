@@ -13,8 +13,148 @@
     margin-top: 2px;
 }
 
+/* SCORES SECTION */
+
 .scores-section {
     grid-column: 2; 
     grid-row: 1 / -1;
-    background-color: green;
+    background-color: #2e3b3f;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.overall-score {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+
+    margin: 0.8rem;
+    border-radius: 20px;
+}
+
+.overall-score-heading-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.overall-score-text {
+    font-size: 9.8rem;
+}
+
+.overall-score-lable {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.overall-score-message {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.overall-score--excellent {
+    background-color: #3aafa9;
+}
+
+.overall-score--good {
+    background-color: #7aaf3a;
+}
+
+.overall-score--bad {
+    background-color: #afa53a;
+}
+
+.overall-score--poor {
+    background-color: #AF3A40;
+}
+
+.score {
+    background-color: #3aafa9;
+
+    margin: 0.8rem;
+    padding: 0.8rem 0.8rem;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.score-form {
+    background-color: #17252a;
+
+    margin: 0.8rem;
+    padding: 0.8rem 0.8rem;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.score-heading-container {
+    padding-left: 1.2rem;
+}
+
+.score-lable {
+    font-size: 1.4rem;
+}
+
+.score-text {
+    font-size: 6.4rem;
+}
+
+.score-icon {
+    font-size: 4.4rem;
+}
+
+.score-button:link, .score-button:visited {
+    background-color: #AF3A40;
+    color: #feffff;
+    padding: 1.6rem 2.2rem;
+
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.score-button:hover, .score-button:active {
+    background-color: #b74e53;
+    transform: scale(1.1);
+}
+
+.score-form-label {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.score-form-input {
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
+    font-size: 1.6rem;
+    border: none;
+    background-image: linear-gradient(92.88deg, #feffff 9.16%, #d4dada 43.89%, #a5acac 64.72%);
+}
+
+.score-form-input:focus {
+    box-shadow: rgba(255, 255, 255, 0.6) 0 1px 30px;
+}
+
+.score-form-button:link, .score-form-button:visited {
+    background-color: #AF3A40;
+    color: #feffff;
+    padding: 1.4rem 2rem;
+
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.score-form-button:hover, .score-form-button:active {
+    background-color: #b74e53;
+    transform: scale(1.1);
 }
