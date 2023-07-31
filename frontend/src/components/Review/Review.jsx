@@ -13,6 +13,9 @@ export const Review = () => {
                 <Tab name="App.js" />
                 <Tab name="Requester.cs" isOpen={true} />
                 <Tab name="Requester.js" />
+                <div className={cx('new-tab')}>
+                    <i className={cx('new-tab-icon', 'fa-solid', 'fa-plus')}></i>
+                </div>
             </div>
             <div className={cx('main-review-section')}></div>
             <div className={cx('scores-section')}>
@@ -54,13 +57,13 @@ export const Review = () => {
                     <div className={cx('score-heading-container')}>
                         <form>
                             <p className={cx('score-form-label')}>Enter a new analyzer: </p>
-                            <input 
+                            <input
                                 className={cx('score-form-input')}
-                                type="text" 
+                                type="text"
                                 placeholder='Security'
                                 name='analyzer'
                                 id='analyzer'
-                            />    
+                            />
                         </form>
                     </div>
                     <Link to='/' className={cx('score-form-button')}>
