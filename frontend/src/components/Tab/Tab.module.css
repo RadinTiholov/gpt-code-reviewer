@@ -1,5 +1,5 @@
 .tab {
-    width: 200px;
+    width: auto;
     background-color: #2e3b3f;
     /* background-color: #17252a; */
     color: #feffff;
@@ -18,7 +18,6 @@
 }
 
 .tab:hover {
-    width: 220px;
     background-color: #455155;
 }
 
