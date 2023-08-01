@@ -18,26 +18,45 @@ export const Review = () => {
         setIsNewFilePage(true);
     }
 
+    const tabOnClick = (id, newCode) => {
+        setCode(newCode);
+
+        setTabs((prevTabs) => {
+            // Set the selected tab's isOpen to true
+            const updatedTabs = prevTabs.map((tab, index) => ({
+                ...tab,
+                isOpen: index === id,
+            }));
+            return updatedTabs;
+        });
+    }
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
+
             reader.onload = (e) => {
-                setCode(e.target.result);
+                // FileReader's onload event is triggered when the file is fully loaded
+                const newCode = e.target.result;
+
+                // Close the new file page
+                setIsNewFilePage(false);
+
+                // Add the new tab
+                const newTab = { name: file.name, isOpen: true, value: newCode };
+                setTabs((prevTabs) => {
+                    // Set every other tab's isOpen to false
+                    const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false }));
+                    // Add the new tab to the updatedTabs array
+                    return [...updatedTabs, newTab];
+                });
+
+                // Set the code state with the loaded data
+                setCode(newCode);
             };
+
             reader.readAsText(file);
-
-            // Close the new file page
-            setIsNewFilePage(false);
-
-            // Add the new tab
-            const newTab = { name: file.name, isOpen: true, value: code};
-            setTabs((prevTabs) => {
-                // Set every other tab's isOpen to false
-                const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false }));
-                // Add the new tab to the updatedTabs array
-                return [...updatedTabs, newTab];
-            });
         }
     };
 
@@ -45,7 +64,7 @@ export const Review = () => {
         <section className={cx('review-section')}>
             <div className={cx('tabs-section')}>
                 {tabs?.map((x, index) => (
-                    <Tab key={index} name={x.name} isOpen={x.isOpen} />
+                    <Tab key={index} id={index} name={x.name} value={x.value} isOpen={x.isOpen} tabOnClick={tabOnClick} />
                 ))}
                 <div className={cx('new-tab')} onClick={newButtonOnClick}>
                     <i className={cx('new-tab-icon', 'fa-solid', 'fa-plus')}></i>
