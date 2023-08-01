@@ -194,3 +194,22 @@
     background-color: #b74e53;
     transform: scale(1.1);
 }
+
+/* REVIEW SECTION */
+
+.code-visualizer-wrapper {
+    width: auto;
+    height: 85vh;
+    overflow: hidden; /* Hide the overflowing content */
+    border-radius: 20px;
+    margin: 1.2rem 1.6rem;
+  }
+  
+  .code-visualizer {
+    width: 100%; /* Ensure the content fits within the wrapper */
+    height: 100%; /* Ensure the content fits within the wrapper */
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 1.6rem;
+  }
+  

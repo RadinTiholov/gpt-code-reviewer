@@ -2,10 +2,27 @@ import classNames from 'classnames/bind';
 import styles from './Review.module.css';
 import { Tab } from '../Tab/Tab';
 import { Link } from 'react-router-dom';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { useEffect, useState } from 'react';
 
 let cx = classNames.bind(styles);
 
 export const Review = () => {
+
+    const [code, setCode] = useState('');
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setCode(e.target.result);
+            };
+            reader.readAsText(file);
+        }
+    };
+
     return (
         <section className={cx('review-section')}>
             <div className={cx('tabs-section')}>
@@ -17,7 +34,14 @@ export const Review = () => {
                     <i className={cx('new-tab-icon', 'fa-solid', 'fa-plus')}></i>
                 </div>
             </div>
-            <div className={cx('main-review-section')}></div>
+            <div className={cx('main-review-section')}>
+                <input type="file" onChange={handleFileChange} />
+                <div className={cx('code-visualizer-wrapper')}>
+                    <SyntaxHighlighter className={cx('code-visualizer')} language="c" showLineNumbers={true} style={vs}>
+                        {code}
+                    </SyntaxHighlighter>
+                </div>
+            </div>
             <div className={cx('scores-section')}>
                 <div className={cx('overall-score', 'overall-score--excellent')}>
                     <div className={cx('overall-score-heading-container')}>
