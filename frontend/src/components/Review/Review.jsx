@@ -11,6 +11,12 @@ let cx = classNames.bind(styles);
 export const Review = () => {
 
     const [code, setCode] = useState('');
+    const [tabs, setTabs] = useState([]);
+    const [isNewFilePage, setIsNewFilePage] = useState(true);
+
+    const newButtonOnClick = () => {
+        setIsNewFilePage(true);
+    }
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -20,27 +26,39 @@ export const Review = () => {
                 setCode(e.target.result);
             };
             reader.readAsText(file);
+
+            // Close the new file page
+            setIsNewFilePage(false);
+
+            // Add the new tab
+            const newTab = { name: file.name, isOpen: true, value: code};
+            setTabs((prevTabs) => {
+                // Set every other tab's isOpen to false
+                const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false }));
+                // Add the new tab to the updatedTabs array
+                return [...updatedTabs, newTab];
+            });
         }
     };
 
     return (
         <section className={cx('review-section')}>
             <div className={cx('tabs-section')}>
-                <Tab name="Example.js" />
-                <Tab name="App.js" />
-                <Tab name="Requester.cs" isOpen={true} />
-                <Tab name="Requester.js" />
-                <div className={cx('new-tab')}>
+                {tabs?.map((x, index) => (
+                    <Tab key={index} name={x.name} isOpen={x.isOpen} />
+                ))}
+                <div className={cx('new-tab')} onClick={newButtonOnClick}>
                     <i className={cx('new-tab-icon', 'fa-solid', 'fa-plus')}></i>
                 </div>
             </div>
             <div className={cx('main-review-section')}>
-                <input type="file" onChange={handleFileChange} />
-                <div className={cx('code-visualizer-wrapper')}>
-                    <SyntaxHighlighter className={cx('code-visualizer')} language="c" showLineNumbers={true} style={vs}>
-                        {code}
-                    </SyntaxHighlighter>
-                </div>
+                {isNewFilePage
+                    ? <input type="file" onChange={handleFileChange} />
+                    : <div className={cx('code-visualizer-wrapper')}>
+                        <SyntaxHighlighter className={cx('code-visualizer')} language="c" showLineNumbers={true} style={vs}>
+                            {code}
+                        </SyntaxHighlighter>
+                    </div>}
             </div>
             <div className={cx('scores-section')}>
                 <div className={cx('overall-score', 'overall-score--excellent')}>
