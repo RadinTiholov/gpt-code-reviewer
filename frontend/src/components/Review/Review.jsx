@@ -31,6 +31,43 @@ export const Review = () => {
         });
     }
 
+    const closeTab = (id) => {
+        setTabs((prevTabs) => {
+            // Filter out the tab with the specified id
+            const updatedTabs = prevTabs.filter((tab, index) => index !== id);
+
+            // Set the code state to empty if there are no more tabs
+            if (updatedTabs.length === 0) {
+                setCode('');
+                setIsNewFilePage(true);
+            } else {
+                // Check if there is an item before the deleted one
+                if (id === tabs.findIndex((tab) => tab.isOpen)) {
+                    // If the closed tab was the active tab, set the active tab to the previous one
+                    const newActiveIndex = id - 1 >= 0 ? id - 1 : id + 1;
+                    setCode(updatedTabs[newActiveIndex].value);
+
+                    // Set the new active tab
+                    const updatedTabsWithActive = updatedTabs.map((tab, index) => ({
+                        ...tab,
+                        isOpen: index === newActiveIndex,
+                    }));
+                    setTabs(updatedTabsWithActive);
+                } else if (id < tabs.findIndex((tab) => tab.isOpen)) {
+                    // If the closed tab was before the active tab, update the active tab accordingly
+                    const newActiveIndex = tabs.findIndex((tab) => tab.isOpen) - 1;
+                    const updatedTabsWithActive = updatedTabs.map((tab, index) => ({
+                        ...tab,
+                        isOpen: index === newActiveIndex,
+                    }));
+                    setTabs(updatedTabsWithActive);
+                }
+            }
+
+            return updatedTabs;
+        });
+    };
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -64,7 +101,15 @@ export const Review = () => {
         <section className={cx('review-section')}>
             <div className={cx('tabs-section')}>
                 {tabs?.map((x, index) => (
-                    <Tab key={index} id={index} name={x.name} value={x.value} isOpen={x.isOpen} tabOnClick={tabOnClick} />
+                    <Tab
+                        key={index}
+                        id={index}
+                        name={x.name}
+                        value={x.value}
+                        isOpen={x.isOpen}
+                        tabOnClick={tabOnClick}
+                        closeTab={closeTab}
+                    />
                 ))}
                 <div className={cx('new-tab')} onClick={newButtonOnClick}>
                     <i className={cx('new-tab-icon', 'fa-solid', 'fa-plus')}></i>
@@ -72,9 +117,16 @@ export const Review = () => {
             </div>
             <div className={cx('main-review-section')}>
                 {isNewFilePage
-                    ? <input type="file" onChange={handleFileChange} />
+                    ? <div className={cx('file-upload-wrapper')}>
+                        <input className={cx('file-upload')} type="file" title=" " onChange={handleFileChange} />
+                    </div>
                     : <div className={cx('code-visualizer-wrapper')}>
-                        <SyntaxHighlighter className={cx('code-visualizer')} language="c" showLineNumbers={true} style={vs}>
+                        <SyntaxHighlighter
+                            className={cx('code-visualizer')}
+                            language="c"
+                            showLineNumbers={true}
+                            style={vs}
+                        >
                             {code}
                         </SyntaxHighlighter>
                     </div>}
