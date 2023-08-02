@@ -239,6 +239,12 @@
     margin: 1.2rem 1.6rem;
 }
 
+.file-upload-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+}
+
 .code-visualizer {
     width: 100%;
     /* Ensure the content fits within the wrapper */
