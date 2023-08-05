@@ -6,5 +6,8 @@ namespace GPTCodeReviewer.Web.Models.Request
     {
         [Required]
         public string Code { get; set; } = null!;
+
+        [Required]
+        public List<string> Factors { get; set; } = null!;
     }
 }

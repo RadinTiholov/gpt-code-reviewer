@@ -24,7 +24,7 @@ def open_new_chat(driver):
 def review_code_gpt3(driver, question, code):
     print("Reviewing code")
 
-    formated_question = question + "Code: " + code + ". PLEASE RETURN *ONLY* the requested JSON format, NOTHING more! Do not provide anything additional."
+    formated_question = question + "Code: " + code + ". PLEASE RETURN *ONLY* the requested JSON format as TEXT, NOTHING more! Do not provide anything additional."
 
     response_json = ask_gpt3_question(driver, formated_question)
 

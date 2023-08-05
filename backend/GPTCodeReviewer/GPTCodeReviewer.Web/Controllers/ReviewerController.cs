@@ -20,7 +20,7 @@ namespace GPTCodeReviewer.Web.Controllers
         {
             try
             {
-                return await gptService.ReviewCode(model.Code);
+                return await gptService.ReviewCode(model.Code, model.Factors);
             }
             catch (Exception ex)
             {
