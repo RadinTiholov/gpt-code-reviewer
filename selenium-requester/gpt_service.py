@@ -68,7 +68,7 @@ def ask_gpt3_question(driver, question):
     # Return the concatenated text
     return concatenated_text
 
-def wait_until_button_has_color_and_click(driver, button_css_selector, expected_color, timeout=15):
+def wait_until_button_has_color_and_click(driver, button_css_selector, expected_color, timeout=60):
     def check_button_color(driver):
         button = driver.find_element(By.CSS_SELECTOR, button_css_selector)
         button_bg_color = driver.execute_script("return window.getComputedStyle(arguments[0]).getPropertyValue('background-color');", button)
