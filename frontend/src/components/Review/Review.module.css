@@ -160,6 +160,13 @@
     transform: scale(1.03);
 }
 
+.analyze-button-error-message {
+    color: #AF3A40;
+    font-size: 1.6rem;
+    margin: 0.8rem;
+    text-align: center;
+}
+
 /* REVIEW SECTION */
 
 .code-visualizer-wrapper {

@@ -92,6 +92,12 @@
     border: none;
     background-color: #feffff;
     color: #17252a;
+    margin-bottom: 0.4rem;
+}
+
+.score-form-error-message {
+    font-size: 1.4rem;
+    color: #AF3A40;
 }
 
 .score-form-input:focus {

@@ -2,11 +2,10 @@ import classNames from 'classnames/bind';
 import reviewStyles from './Review.module.css';
 import scoreStyles from '../Score/Score.module.css';
 import { Tab } from '../Tab/Tab';
-import { Link } from 'react-router-dom';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import * as reviewService from '../../dataServices/reviewService'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Score } from '../Score/Score';
 
 let cx = classNames.bind(reviewStyles);
@@ -18,17 +17,37 @@ export const Review = () => {
     const [analyzerNameInput, setAnalyzerNameInput] = useState('');
     const [tabs, setTabs] = useState([]);
     const [scores, setScores] = useState([]);
+    const [isReviewed, setIsReviewed] = useState(false);
     const [isNewFilePage, setIsNewFilePage] = useState(true);
-    const [isReviewed, setIsReviewed] = useState(true);
+    const [errors, setErrors] = useState({
+        inputError: false,
+        reviewError: false
+    });
 
     const addNewScoreButton = (e) => {
         e.preventDefault();
 
-        setScores((prevScores) => {
-            const newScore = { name: analyzerNameInput, score: 0.0 }; // Initialize the score as needed
-            return [...prevScores, newScore];
-        });
-    }
+        if (!analyzerNameInput) {
+            setErrors((prevState) => ({
+                ...prevState,
+                inputError: true
+            }));
+            return;
+        }
+
+        setScores((prevScores) => [
+            ...prevScores,
+            { name: analyzerNameInput, score: 0.0 }
+        ]);
+
+        setErrors((prevState) => ({
+            inputError: false,
+            reviewError: false
+        }));
+
+        setAnalyzerNameInput('');
+    };
+
 
     const closeScore = (index) => {
         setScores((prevScores) => {
@@ -37,7 +56,7 @@ export const Review = () => {
             return newScores;
         });
     };
-    
+
 
     const newButtonOnClick = () => {
         setIsNewFilePage(true);
@@ -125,6 +144,14 @@ export const Review = () => {
     const onReview = (e) => {
         e.preventDefault();
 
+        if (scores.length === 0) {
+            setErrors((prevState) => ({
+                ...prevState,
+                reviewError: true
+            }));
+            return;
+        }
+
         reviewService
             .reviewCode({ code })
             .then(res => {
@@ -180,37 +207,40 @@ export const Review = () => {
                             </div>
                             <p className={cx('overall-score-message')}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                         </div>
-                        {scores?.map((x, index) => (
-                            <Score
-                                key={index}
-                                id={index}
-                                name={x.name}
-                                score={x.score}
-                                closeScore={closeScore}
-                            />
-                        ))}
-                        <div className={cxs('score-form')}>
-                            <div className={cxs('score-heading-container')}>
-                                <form id='newScoreForm'>
-                                    <p className={cxs('score-form-label')}>Enter a new analyzer: </p>
-                                    <input
-                                        className={cxs('score-form-input')}
-                                        type="text"
-                                        placeholder='Security'
-                                        name='analyzer'
-                                        id='analyzer'
-                                        value={analyzerNameInput}
-                                        onChange={(e) => setAnalyzerNameInput(e.target.value)}
-                                    />
-                                </form>
-                            </div>
-                            <button form="newScoreForm" onClick={addNewScoreButton} className={cxs('score-form-button')}>
-                                <i className={cxs('score-icon', 'fa-solid', 'fa-plus')}></i>
-                            </button>
-                        </div>
                     </> :
                     <button onClick={onReview} className={cx('analyze-button')}>Analyze code</button>
                 }
+                {errors.reviewError && <p className={cx('analyze-button-error-message')}>Please add the aspects upon which the review will be based.</p>}
+
+                {scores?.map((x, index) => (
+                    <Score
+                        key={index}
+                        id={index}
+                        name={x.name}
+                        score={x.score}
+                        closeScore={closeScore}
+                    />
+                ))}
+                <div className={cxs('score-form')}>
+                    <div className={cxs('score-heading-container')}>
+                        <form id='newScoreForm'>
+                            <p className={cxs('score-form-label')}>Enter a new analyzer: </p>
+                            <input
+                                className={cxs('score-form-input')}
+                                type="text"
+                                placeholder='Security'
+                                name='analyzer'
+                                id='analyzer'
+                                value={analyzerNameInput}
+                                onChange={(e) => setAnalyzerNameInput(e.target.value)}
+                            />
+                            {errors.inputError && <p className={cxs('score-form-error-message')}>Required!</p>}
+                        </form>
+                    </div>
+                    <button form="newScoreForm" onClick={addNewScoreButton} className={cxs('score-form-button')}>
+                        <i className={cxs('score-icon', 'fa-solid', 'fa-plus')}></i>
+                    </button>
+                </div>
             </div>
         </section>
     )
