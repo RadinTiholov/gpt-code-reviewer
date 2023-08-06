@@ -24,7 +24,7 @@ def open_new_chat(driver):
 def review_code_gpt3(driver, question, code):
     print("Reviewing code")
 
-    formated_question = question + "Code: " + code + ". PLEASE RETURN *ONLY* the requested JSON format as TEXT, NOTHING more! Do not provide anything additional."
+    formated_question = question + "Code: " + code + ". PLEASE RETURN *ONLY* the requested JSON text, *NOTHING* more! Do not provide anything additional!"
 
     response_json = ask_gpt3_question(driver, formated_question)
 
@@ -61,9 +61,21 @@ def ask_gpt3_question(driver, question):
 
     concatenated_text = ""
 
-    # Iterate through the children elements and append their text to the concatenated_text
-    for el in response_children:
-        concatenated_text += el.text
+    # Check if the response contains a <code> element before iterating through children
+    response_contains_code = any('code' in el.tag_name for el in response_children)
+    if response_contains_code:
+        print("Response contains a <code> element!")
+        
+        # Extract text content from the <code> element and add to concatenated_text
+        for el in response_children:
+            if 'code' in el.tag_name:
+                concatenated_text += el.text
+                break
+    else:
+        print("Response does not contain a <code> element.")
+        # Iterate through the children elements and append their text to the concatenated_text
+        for el in response_children:
+            concatenated_text += el.text
 
     # Return the concatenated text
     return concatenated_text
