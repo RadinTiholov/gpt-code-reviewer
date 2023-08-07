@@ -136,3 +136,9 @@ li {
     
     background-color: #61bfba;
 }
+
+@media (max-width: 700px) {
+    .main-section {
+        margin-left: 0;
+    }
+}

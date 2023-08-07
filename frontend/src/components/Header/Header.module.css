@@ -111,3 +111,33 @@
     color: #17252a;
     font-size: 4.8rem;
 }
+
+@media (max-width: 700px) {
+    .header-closed .header-list {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .header-closed {
+        height: 100px;
+        width: 100%;
+    }
+
+    .header {
+        width: 100%;
+    }
+
+    .header-closed li:not(.header-heading) {
+        display: none;
+    }
+
+    li:not(.header-heading) {
+        display: block;
+    }
+
+    .header-logo {
+        height: 6rem !important;
+    }
+}
