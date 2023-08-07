@@ -14,7 +14,9 @@
 
 .home-logo {
     height: 30rem;
-    animation: rotate 8s linear infinite; /* Adjust the duration as needed */
+    animation: rotate 8s linear infinite;
+    z-index: -2;
+    /* Adjust the duration as needed */
 }
 
 .home-link:link,
@@ -38,11 +40,64 @@
     background-color: #b74e53;
 }
 
+/* ANIMATION */
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* MEDIA QUERIES*/
+@media(max-width: 720px) {
+    .home-link-list {
+        gap: 1.6rem;
+    }
+
+    .home-logo {
+        height: 20rem;
+    }
+
+    .home-link:link,
+    .home-link:visited {
+        font-size: 3.2rem;
+        width: 180px;
+    }
+}
+
+@media(max-width: 420px) {
+    .home-link-list {
+        gap: 1.4rem;
+    }
+
+    .home-logo {
+        height: 16rem;
+    }
+
+    .home-link:link,
+    .home-link:visited {
+        font-size: 2.2rem;
+        padding: 1.2rem 2rem;
+        width: 140px;
+    }
+}
+
+@media(max-width: 320px) {
+    .home-link-list {
+        gap: 1.2rem;
+    }
+
+    .home-logo {
+        height: 12rem;
+    }
+
+    .home-link:link,
+    .home-link:visited {
+        font-size: 1.6rem;
+        padding: 1rem 1.6rem;
+        width: 120px;
     }
 }
