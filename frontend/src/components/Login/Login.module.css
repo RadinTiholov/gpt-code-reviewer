@@ -19,3 +19,17 @@
     order: 2;
     align-self: center;
 }
+
+@media (max-width: 950px) {
+    .login-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        flex-direction: column;
+    }
+
+    .login-img {
+        display: none;
+    }
+}
