@@ -167,6 +167,24 @@
     text-align: center;
 }
 
+.spinner-logo {
+    margin-top: 1.2rem;
+    height: 10rem;
+    animation: rotate 3s linear infinite;
+    z-index: -2;
+}
+
+/* ANIMATION */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* REVIEW SECTION */
 
 .code-visualizer-wrapper {

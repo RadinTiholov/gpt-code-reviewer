@@ -7,7 +7,7 @@ import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import * as reviewService from '../../dataServices/reviewService'
 import { useState } from 'react';
 import { Score } from '../Score/Score';
-import { xt256 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import logo from '../../images/logo-small-dark-alternative.png';
 
 let cx = classNames.bind(reviewStyles);
 let cxs = classNames.bind(scoreStyles);
@@ -19,6 +19,7 @@ export const Review = () => {
     const [tabs, setTabs] = useState([]);
     const [scores, setScores] = useState([]);
     const [overallScore, setOverallScore] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const [isReviewed, setIsReviewed] = useState(false);
     const [isNewFilePage, setIsNewFilePage] = useState(true);
     const [errors, setErrors] = useState({
@@ -154,13 +155,14 @@ export const Review = () => {
             return;
         }
 
+        setIsLoading(true);
+
         const factors = scores.map(x => x.name);
 
         reviewService
             .reviewCode({ code, factors })
             .then(res => {
                 setIsReviewed(true)
-                console.log(res);
 
                 setScores((state) => {
                     factors.forEach((factorName) => {
@@ -181,11 +183,14 @@ export const Review = () => {
                     score: res['overallScore'],
                     message: res['overallScoreMessage']
                 }));
+
+                setIsLoading(false);
                 
             })
             .catch(res => {
                 //TODO
                 alert(res);
+                setIsLoading(false);
             })
     }
 
@@ -234,7 +239,10 @@ export const Review = () => {
                             <p className={cx('overall-score-message')}>{overallScore?.message}</p>
                         </div>
                     </> :
-                    <button onClick={onReview} className={cx('analyze-button')}>Analyze code</button>
+                    <button onClick={onReview} className={cx('analyze-button')}>
+                        Analyze code
+                        {isLoading && <img className={cx('spinner-logo')} src={logo} alt='The logo of the web application' />}
+                    </button>
                 }
                 {errors.reviewError && <p className={cx('analyze-button-error-message')}>Please add the aspects upon which the review will be based.</p>}
 
