@@ -1,6 +1,10 @@
+import classNames from 'classnames/bind';
+import styles from './Register.module.css';
 import { useState } from "react";
 import * as identityService from "../../dataServices/identityService";
 import { useNavigate } from "react-router-dom";
+
+let cx = classNames.bind(styles);
 
 export const Register = () => {
 
@@ -34,36 +38,44 @@ export const Register = () => {
     }
 
     return (
-        <form onSubmit={register}>
-            <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={inputData.username}
-                onChange={onChange}
-            />
-            <br />
-            <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={inputData.email}
-                onChange={onChange}
-            />
-            <br />
-            <input
-                type="password"
-                name="password"
-                value={inputData.password}
-                onChange={onChange}
-            />
-            <br />
-            {error?.active ? 
-            <p>
-                Error!
-            </p>
-            : <></>}
-            <button type="submit">Register</button>
-        </form>
+        <section className={cx('register-section')}>
+            <div className={cx('register-heading')}>
+                <p className={cx('register-heading-fragment-1', 'register-heading-fragment')}>Review</p>
+                <p className={cx('register-heading-fragment-2', 'register-heading-fragment')}>Your</p>
+                <p className={cx('register-heading-fragment-3', 'register-heading-fragment')}>Code</p>
+            </div>
+            <form className={cx('form', 'form--register')} onSubmit={register}>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={inputData.username}
+                    onChange={onChange}
+                />
+                <br />
+                <input
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={inputData.email}
+                    onChange={onChange}
+                />
+                <br />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={inputData.password}
+                    onChange={onChange}
+                />
+                <br />
+                <button className={cx('btn', 'btn--large')} type="submit">Register</button>
+                {error?.active ?
+                    <p className={cx('error-message')}>
+                        Error!
+                    </p>
+                    : <></>}
+            </form>
+        </section>
     )
 }

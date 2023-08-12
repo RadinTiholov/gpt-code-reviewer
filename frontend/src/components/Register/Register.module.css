@@ -1,0 +1,79 @@
+.register-section {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    column-gap: 9.8rem;
+    align-items: center;
+    line-height: 1.2;
+    padding-inline: 6.4rem;
+
+    /* CENTER THE SECTION */
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+}
+
+.register-heading {
+    display: flex; /* Add this line */
+    flex-direction: column; /* Add this line to make elements stack vertically */
+    gap: 4.8rem;
+    line-height: 1;
+
+    font-size: 13rem;
+    font-weight: bold;
+    color: rgba(254, 255, 255, 0.6);
+}
+
+.register-heading-fragment-1 {
+    order: 1; /* Change the order to 1 for the first element */
+}
+
+.register-heading-fragment-2 {
+    order: 2; /* Change the order to 2 for the second element */
+    text-align: center; /* Align the second element at the center */
+}
+
+.register-heading-fragment-3 {
+    order: 3; /* Change the order to 3 for the last element */
+    align-self: flex-end; /* Align the last element at the end */
+    color: #feffff;
+    font-style: italic;
+}
+
+.register-heading-fragment:hover {
+    text-shadow: rgba(255, 255, 255, 0.5) 0 1px 30px;
+}
+
+.form--register {
+    order: 2;
+    align-self: center;
+}
+
+@media (max-width: 1150px) {
+    .register-heading {
+        gap: 3.2rem;
+        line-height: 0.9;
+    
+        font-size: 8rem;
+    }
+}
+
+@media (max-width: 980px) {
+    .register-heading {
+        gap: 2.4rem;
+        line-height: 0.8;
+    
+        font-size: 6rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .register-heading {
+        display: none;
+        visibility: hidden;
+    }
+
+    .form--register {
+        grid-row: 1 / -1;
+        grid-column: 1 / -1;
+    }
+}

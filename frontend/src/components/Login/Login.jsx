@@ -3,6 +3,11 @@ import * as identityService from "../../dataServices/identityService";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../../actions/authActions"
+import classNames from 'classnames/bind';
+import styles from './Login.module.css';
+import meme from '../../images/meme-login.png';
+
+let cx = classNames.bind(styles);
 
 export const Login = () => {
 
@@ -39,28 +44,34 @@ export const Login = () => {
     }
 
     return (
-        <form onSubmit={login}>
-            <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={inputData.username}
-                onChange={onChange}
-            />
-            <br />
-            <input
-                type="password"
-                name="password"
-                value={inputData.password}
-                onChange={onChange}
-            />
-            <br />
-            {error ?
-                <p>
-                    Error!
-                </p>
-                : <></>}
-            <button type="submit">Login</button>
-        </form>
+        <section className={cx('login-section')}>
+            <div>
+                <img className={cx('login-img')} src={meme} alt="Meme for the cover of the login page" />
+            </div>
+            <form className={cx('form', 'form--login')} onSubmit={login}>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={inputData.username}
+                    onChange={onChange}
+                />
+                <br />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={inputData.password}
+                    onChange={onChange}
+                />
+                <br />
+                <button className={cx('btn', 'btn--large')} type="submit">Login</button>
+                {error?.active ?
+                    <p className={cx('error-message')}>
+                        Error!
+                    </p>
+                    : <></>}
+            </form>
+        </section>
     )
 }
