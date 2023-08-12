@@ -9,7 +9,7 @@ export const Score = (props) => {
         <div className={cx('score')}>
             <div className={cx('score-heading-container')}>
                 <p className={cx('score-lable')}>{props.name} score:</p>
-                <p className={cx('score-text')}>{props.score.toFixed(1)}</p>
+                <p className={cx('score-text')}>{Number(props.score).toFixed(1)}</p>
             </div>
             <div className={cx('score-buttons-container')}>
                 <button onClick={() => props.closeScore(props.id)} className={cx('score-button-close')}>

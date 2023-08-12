@@ -7,6 +7,7 @@ import { vs } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import * as reviewService from '../../dataServices/reviewService'
 import { useState } from 'react';
 import { Score } from '../Score/Score';
+import { xt256 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 let cx = classNames.bind(reviewStyles);
 let cxs = classNames.bind(scoreStyles);
@@ -17,6 +18,7 @@ export const Review = () => {
     const [analyzerNameInput, setAnalyzerNameInput] = useState('');
     const [tabs, setTabs] = useState([]);
     const [scores, setScores] = useState([]);
+    const [overallScore, setOverallScore] = useState({});
     const [isReviewed, setIsReviewed] = useState(false);
     const [isNewFilePage, setIsNewFilePage] = useState(true);
     const [errors, setErrors] = useState({
@@ -152,14 +154,38 @@ export const Review = () => {
             return;
         }
 
+        const factors = scores.map(x => x.name);
+
         reviewService
-            .reviewCode({ code })
+            .reviewCode({ code, factors })
             .then(res => {
                 setIsReviewed(true)
-                // TODO: Set results
+                console.log(res);
+
+                setScores((state) => {
+                    factors.forEach((factorName) => {
+                        if (res.hasOwnProperty(factorName + 'Score')) {
+                            const indexToChange = state.findIndex((x) => x.name === factorName);
+
+                            if (indexToChange !== -1) {
+                                state[indexToChange].score = res[factorName + 'Score'];
+                            }
+                        }
+                    });
+
+                    return [...state];
+                });
+
+                setOverallScore((prevOverallScore) => ({
+                    ...prevOverallScore,
+                    score: res['overallScore'],
+                    message: res['overallScoreMessage']
+                }));
+                
             })
             .catch(res => {
-                // TODO
+                //TODO
+                alert(res);
             })
     }
 
@@ -203,9 +229,9 @@ export const Review = () => {
                         <div className={cx('overall-score', 'overall-score--excellent')}>
                             <div className={cx('overall-score-heading-container')}>
                                 <p className={cx('overall-score-lable')}>Overall score: </p>
-                                <p className={cx('overall-score-text')}>8.3</p>
+                                <p className={cx('overall-score-text')}>{overallScore?.score}</p>
                             </div>
-                            <p className={cx('overall-score-message')}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                            <p className={cx('overall-score-message')}>{overallScore?.message}</p>
                         </div>
                     </> :
                     <button onClick={onReview} className={cx('analyze-button')}>Analyze code</button>
