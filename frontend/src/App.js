@@ -5,6 +5,8 @@ import { Register } from './components/Register/Register';
 import { Login } from './components/Login/Login';
 import { Header } from './components/Header/Header';
 import { Review } from './components/Review/Review';
+import GuestGuard from './components/Guards/GuestGuard';
+import UserGuard from './components/Guards/UserGuard';
 
 function App() {
 	return (
@@ -13,9 +15,13 @@ function App() {
 			<section className='main-section'>
 				<Routes>
 					<Route path='/' element={<Home />} />
-					<Route path='/register' element={<Register />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='/review' element={<Review />} />
+					<Route element={<GuestGuard />}>
+						<Route path='/review' element={<Review />} />
+					</Route>
+					<Route element={<UserGuard />}>
+						<Route path='/register' element={<Register />} />
+						<Route path='/login' element={<Login />} />
+					</Route>
 				</Routes>
 			</section >
 		</>
