@@ -171,6 +171,7 @@ export const Review = () => {
 
                             if (indexToChange !== -1) {
                                 state[indexToChange].score = res[factorName + 'Score'];
+                                state[indexToChange].scoreMessage = res[factorName + 'ScoreMessage'];
                             }
                         }
                     });
@@ -252,6 +253,7 @@ export const Review = () => {
                         id={index}
                         name={x.name}
                         score={x.score}
+                        scoreMessage={x.scoreMessage}
                         closeScore={closeScore}
                     />
                 ))}

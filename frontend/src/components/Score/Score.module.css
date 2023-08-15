@@ -34,8 +34,19 @@
     font-size: 6.4rem;
 }
 
+.score-details {
+    padding-top: 0.4rem;
+    font-size: 1.4rem;
+}
+
 .score-icon {
     font-size: 4.4rem;
+
+    transition: all 0.5s;
+}
+
+.score-icon--open {
+    transform: rotateZ(450deg);
 }
 
 .score-buttons-container {
@@ -44,18 +55,17 @@
     justify-content: center;
 }
 
-.score-button:link,
-.score-button:visited {
+.score-button{
     background-color: #AF3A40;
     color: #feffff;
     padding: 1.6rem 2.2rem;
 
     border-radius: 20px;
+    border: 0;
     transition: all 0.3s;
 }
 
-.score-button:hover,
-.score-button:active {
+.score-button:hover{
     background-color: #b74e53;
     transform: scale(1.1);
 }
