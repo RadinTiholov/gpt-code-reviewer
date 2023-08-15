@@ -31,11 +31,10 @@ export const Login = () => {
 
         identityService.login(inputData)
             .then(res => {
-
                 // Save user state to Redux store
                 dispatch(loginSuccess(res));
 
-                navigate('/')
+                navigate('/review')
             })
             .catch(res => {
                 // Save error state to Redux store

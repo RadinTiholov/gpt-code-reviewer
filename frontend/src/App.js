@@ -7,6 +7,7 @@ import { Header } from './components/Header/Header';
 import { Review } from './components/Review/Review';
 import GuestGuard from './components/Guards/GuestGuard';
 import UserGuard from './components/Guards/UserGuard';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route element={<GuestGuard />}>
 						<Route path='/review' element={<Review />} />
+						<Route path='/logout' element={<Logout />} />
 					</Route>
 					<Route element={<UserGuard />}>
 						<Route path='/register' element={<Register />} />
