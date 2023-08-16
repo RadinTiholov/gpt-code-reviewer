@@ -10,7 +10,6 @@ export const Score = (props) => {
 
     const detailsClick = () => setIsOpen(state => !state)
 
-    console.log(props);
     return (
         <div className={cx('score')}>
             <div className={cx('score-heading-container')}>

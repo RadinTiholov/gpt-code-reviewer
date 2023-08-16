@@ -38,10 +38,26 @@ export const Review = () => {
             return;
         }
 
-        setScores((prevScores) => [
-            ...prevScores,
-            { name: analyzerNameInput, score: 0.0 }
-        ]);
+        setScores((prevScores) => {
+            const scores = [
+                ...prevScores,
+                { name: analyzerNameInput, score: 0.0 }
+            ]
+
+            // Update the scores to the tab
+            const currentOpenTab = tabs.find(tab => tab.isOpen);
+
+            if (currentOpenTab) {
+                // Update the isReview property of the current open tab
+                const updatedTabs = tabs.map(tab => ({
+                    ...tab,
+                    scores: tab === currentOpenTab ? scores : tab.scores ? tab.scores : [],
+                }));
+                setTabs(updatedTabs);
+            }
+
+            return scores;
+        });
 
         setErrors((prevState) => ({
             inputError: false,
@@ -63,10 +79,17 @@ export const Review = () => {
 
     const newButtonOnClick = () => {
         setIsNewFilePage(true);
+
+        // Reset
+        setScores([]);
+        setIsReviewed(false);
     }
 
     const tabOnClick = (id, newCode) => {
+        // Set stats of the selected tab
         setCode(newCode);
+        setIsReviewed(tabs[id].isReview);
+        setScores(tabs[id].scores);
 
         setTabs((prevTabs) => {
             // Set the selected tab's isOpen to true
@@ -131,13 +154,17 @@ export const Review = () => {
                 const newTab = { name: file.name, isOpen: true, value: newCode };
                 setTabs((prevTabs) => {
                     // Set every other tab's isOpen to false
-                    const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false }));
+                    const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false, isReviewed: false, scores: [] }));
                     // Add the new tab to the updatedTabs array
                     return [...updatedTabs, newTab];
                 });
 
                 // Set the code state with the loaded data
                 setCode(newCode);
+
+                // Set that it isn't reviewed yet
+                setIsReviewed(false);
+                setScores([]);
             };
 
             reader.readAsText(file);
@@ -162,7 +189,7 @@ export const Review = () => {
         reviewService
             .reviewCode({ code, factors })
             .then(res => {
-                setIsReviewed(true)
+                setIsReviewed(true);
 
                 setScores((state) => {
                     factors.forEach((factorName) => {
@@ -185,8 +212,22 @@ export const Review = () => {
                     message: res['overallScoreMessage']
                 }));
 
+                // Set that the tab is reviewed
+                // Find the currently open tab
+                const currentOpenTab = tabs.find(tab => tab.isOpen);
+
+                if (currentOpenTab) {
+                    // Update the isReview property of the current open tab
+                    const updatedTabs = tabs.map(tab => ({
+                        ...tab,
+                        isReview: tab === currentOpenTab ? true : tab.isReview,
+                        scores: tab === currentOpenTab ? scores : tab.scores.length > 0 ? tab.scores : [],
+                        overallScore: tab === currentOpenTab ? overallScore : tab.overallScore ? tab.overallScore : null,
+                    }));
+                    setTabs(updatedTabs);
+                }
+
                 setIsLoading(false);
-                
             })
             .catch(res => {
                 //TODO
