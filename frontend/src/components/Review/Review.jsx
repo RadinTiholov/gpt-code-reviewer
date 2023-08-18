@@ -83,6 +83,7 @@ export const Review = () => {
         // Reset
         setScores([]);
         setIsReviewed(false);
+        setCode('');
     }
 
     const tabOnClick = (id, newCode) => {
@@ -90,6 +91,9 @@ export const Review = () => {
         setCode(newCode);
         setIsReviewed(tabs[id].isReview);
         setScores(tabs[id].scores);
+
+        // Reset
+        setIsNewFilePage(false);
 
         setTabs((prevTabs) => {
             // Set the selected tab's isOpen to true
@@ -151,10 +155,10 @@ export const Review = () => {
                 setIsNewFilePage(false);
 
                 // Add the new tab
-                const newTab = { name: file.name, isOpen: true, value: newCode };
+                const newTab = { name: file.name, isOpen: true, isReviewed: false, value: newCode, scores: [] };
                 setTabs((prevTabs) => {
                     // Set every other tab's isOpen to false
-                    const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false, isReviewed: false, scores: [] }));
+                    const updatedTabs = prevTabs.map((tab) => ({ ...tab, isOpen: false }));
                     // Add the new tab to the updatedTabs array
                     return [...updatedTabs, newTab];
                 });
