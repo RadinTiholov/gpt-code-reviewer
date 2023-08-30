@@ -18,8 +18,10 @@ def initialize_driver():
 def open_new_chat(driver):
     print("Opening new chat...")
 
-    textarea = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".flex.p-3.items-center.gap-3.transition-colors.duration-200.text-white.cursor-pointer.text-sm.rounded-md.border")))
-    textarea.click()
+    css_selector = "a:has(a.truncate)"
+        
+    button = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, css_selector)))
+    button.click()
 
 def review_code_gpt3(driver, question, code):
     print("Reviewing code")

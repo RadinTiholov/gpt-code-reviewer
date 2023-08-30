@@ -90,7 +90,7 @@ app
 app.UseRouting();
 
 app.UseCors(options => options
-    .WithOrigins("https://localhost:3000")
+    //.WithOrigins("https://localhost:3000")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .SetIsOriginAllowed((x) => true)
@@ -99,7 +99,6 @@ app.UseCors(options => options
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Start GPT authorization process
 var gptService = app.Services.GetRequiredService<IGPTService>();
 await gptService.LoginInGPT();
 
