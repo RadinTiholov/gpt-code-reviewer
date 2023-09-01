@@ -18,7 +18,7 @@ def initialize_driver():
 def open_new_chat(driver):
     print("Opening new chat...")
 
-    css_selector = "a:has(a.truncate)"
+    css_selector = ".flex.px-3"
         
     button = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, css_selector)))
     button.click()

@@ -90,7 +90,7 @@ app
 app.UseRouting();
 
 app.UseCors(options => options
-    //.WithOrigins("https://localhost:3000")
+    .WithOrigins("http://localhost:3000")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .SetIsOriginAllowed((x) => true)
