@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GPTCodeReviewer.Data\GPTCodeReviewer.Data.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Services\GPTCodeReviewer.Services.csproj" />
   </ItemGroup>
 
 </Project>

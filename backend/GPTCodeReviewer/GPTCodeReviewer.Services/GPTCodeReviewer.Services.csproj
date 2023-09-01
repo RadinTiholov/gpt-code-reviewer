@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GPTCodeReviewer.Web.GPT\GPTCodeReviewer.Web.GPT.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj" />
+  </ItemGroup>
+
+</Project>

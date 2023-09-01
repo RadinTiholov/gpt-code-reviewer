@@ -16,15 +16,15 @@ Paragraph: 1.6
 --- 02 COLORS: 
 - Pack: #3aafa9 / #17252a / #2b7a78 / #def2f1 / #feffff
 - Tints: 
-- Shades: 
-- Accents: 
+- Shades: #4eb7b2 || #2e3b3f / #455155
+- Accents: #AF3A40
 - Greys: 
 
 --- 03 SHADOWS
-
+- Header - box-shadow: 143px 0px 400px -36px rgba(59, 176, 170, 0.445);
 
 --- 04 BORDER-RADIUS
-
+- 12px, 20px, 11px
 
 --- 05 WHITESPACE (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
@@ -44,14 +44,151 @@ Paragraph: 1.6
 html {
     font-size: 62.5%;
     overflow-x: hidden;
+    background-color: #17252a;
+}
+
+.main-section {
+    margin-left: 100px;
 }
 
 body {
     font-family: 'Rubik', sans-serif;
     line-height: 1;
     font-weight: 400;
-    color: #555;
+    color: #feffff;
 
     /*Only works if there is nothing aboslutely positoined in relation to body*/
     overflow-x: hidden;
+}
+
+li {
+    list-style: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+.form input {
+    padding: 1.6rem 4.8rem;
+    border-radius: 20px;
+    font-size: 3rem;
+    border: none;
+    background-image: linear-gradient(92.88deg, #feffff 9.16%, #d4dada 43.89%, #a5acac 64.72%);
+}
+
+.form input:focus {
+    box-shadow: rgba(255, 255, 255, 0.6) 0 1px 30px;
+}
+
+.btn {
+    background-image: linear-gradient(92.88deg, #b03b41 9.16%, #a42e34 43.89%, #8b1e24 64.72%);
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn:hover,
+.btn:active {
+    background-image: linear-gradient(92.88deg, #8b1e24 9.16%, #a42e34 43.89%, #AF3A40 64.72%);
+    box-shadow: rgba(176, 59, 65, 0.5) 0 1px 30px;
+    border: none;
+    color: #17252a;
+}
+
+.button-36:hover {
+    transition-duration: .1s;
+}
+
+.btn--large {
+    padding: 1.6rem 4.8rem;
+    border-radius: 20px;
+    font-size: 3rem;
+    color: #feffff;
+}
+
+.error-message {
+    font-size: 3.6rem;
+    margin-top: 1.6rem;
+    color: #AF3A40;
+    align-self: center;
+}
+
+.file-upload {
+    color: #feffff;
+    font-size: 2rem;
+}
+
+.file-upload::file-selector-button {
+    border: none;
+    font-size: 2.6rem;
+    padding: 1.6rem 4.8rem;
+    color: #feffff;
+    background-color: #3aafa9;
+    border-radius: 20px;
+
+    transition: all 0.3s;
+}
+
+.file-upload::file-selector-button:hover {
+    font-size: 2.8rem;
+    
+    background-color: #61bfba;
+}
+
+@media (max-width: 700px) {
+    .main-section {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 550px) {
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .form input {
+        padding: 1.4rem 3.6rem;
+        font-size: 2.4rem;
+    }
+
+    .btn--large {
+        padding: 1.4rem 3.6rem;
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .form {
+        gap: 1.6rem;
+    }
+    
+    .form input {
+        padding: 1.2rem 3rem;
+        font-size: 2rem;
+    }
+
+    .btn--large {
+        padding: 1.2rem 3rem;
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .form {
+        gap: 1.2rem;
+    }
+
+    .form input {
+        padding: 1rem 2.4rem;
+        font-size: 1.6rem;
+    }
+
+    .btn--large {
+        padding: 1rem 2.4rem;
+        font-size: 1.6rem;
+    }
 }

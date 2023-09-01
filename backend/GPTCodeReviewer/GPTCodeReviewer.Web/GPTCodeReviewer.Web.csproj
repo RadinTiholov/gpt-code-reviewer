@@ -13,10 +13,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GPTCodeReviewer.Data\GPTCodeReviewer.Data.csproj" />
+    <ProjectReference Include="..\GPTCodeReviewer.Services\GPTCodeReviewer.Services.csproj" />
     <ProjectReference Include="..\GPTCodeReviewer.Web.Infrastructure\GPTCodeReviewer.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj" />
   </ItemGroup>

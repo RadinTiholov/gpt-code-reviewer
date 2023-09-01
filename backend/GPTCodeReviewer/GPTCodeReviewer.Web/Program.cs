@@ -1,4 +1,3 @@
-using GPTCodeReviewer.Web;
 using GPTCodeReviewer.Data;
 using GPTCodeReviewer.Data.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using GPTCodeReviewer.Web.Infrastructure.Extensions;
+using GPTCodeReviewer.Services.Contracts;
+using GPTCodeReviewer.Services;
+using GPTCodeReviewer.Web;
+using Microsoft.OpenApi.Models;
+using GPTCodeReviewer.Web.GPT;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +35,10 @@ var applicationSettingsConfiguration = builder.Configuration.GetSection("Applica
 builder.Services.Configure<ApplicationSettings>(applicationSettingsConfiguration);
 
 var appSettings = applicationSettingsConfiguration.Get<ApplicationSettings>();
-var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+var jwtKey = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+
+builder.Services.AddTransient<IGPTService>(x => new GPTService(new CodeReviewRequester()));
 
 builder.Services.
     AddAuthentication(x =>
@@ -46,11 +53,16 @@ builder.Services.
         x.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
+            IssuerSigningKey = new SymmetricSecurityKey(jwtKey),
             ValidateIssuer = false,
             ValidateAudience = false,
         };
     });
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo() { Title = "GptCodeReviewer Api", Version = "v1" });
+});
 
 builder.Services.AddControllers();
 
@@ -67,9 +79,18 @@ else
     app.UseHsts();
 }
 
+app
+    .UseSwagger()
+    .UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "GptCodeReviewer Api");
+        c.RoutePrefix = String.Empty;
+    });
+
 app.UseRouting();
 
 app.UseCors(options => options
+    .WithOrigins("http://localhost:3000")
     .AllowAnyHeader()
     .AllowAnyMethod()
     .SetIsOriginAllowed((x) => true)
@@ -77,6 +98,9 @@ app.UseCors(options => options
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+var gptService = app.Services.GetRequiredService<IGPTService>();
+await gptService.LoginInGPT();
 
 app.MapControllerRoute(
     name: "default",

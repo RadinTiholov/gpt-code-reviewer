@@ -13,11 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E9CE04
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPTCodeReviewer.Web", "GPTCodeReviewer.Web\GPTCodeReviewer.Web.csproj", "{BBC33C22-138D-49A6-81AB-5DB184DBB428}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPTCodeReviewer.Web.Infrastructure", "GPTCodeReviewer.Web.Infrastructure\GPTCodeReviewer.Web.Infrastructure.csproj", "{160794A6-DA61-4745-9AA8-D038736ABDE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPTCodeReviewer.Web.Infrastructure", "GPTCodeReviewer.Web.Infrastructure\GPTCodeReviewer.Web.Infrastructure.csproj", "{160794A6-DA61-4745-9AA8-D038736ABDE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPTCodeReviewer.Web.Models", "GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj", "{4A91BEDF-4473-4C19-910A-13FF8BAF43A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPTCodeReviewer.Web.Models", "GPTCodeReviewer.Web.Models\GPTCodeReviewer.Web.Models.csproj", "{4A91BEDF-4473-4C19-910A-13FF8BAF43A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPTCodeReviewer.Data", "GPTCodeReviewer.Data\GPTCodeReviewer.Data.csproj", "{BCD59BE1-093E-4745-9569-A7627BF09B5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPTCodeReviewer.Data", "GPTCodeReviewer.Data\GPTCodeReviewer.Data.csproj", "{BCD59BE1-093E-4745-9569-A7627BF09B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPTCodeReviewer.Web.GPT", "GPTCodeReviewer.Web.GPT\GPTCodeReviewer.Web.GPT.csproj", "{668BC60E-E304-4D4A-A7E3-C2B1E3283B0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPTCodeReviewer.Services", "GPTCodeReviewer.Services\GPTCodeReviewer.Services.csproj", "{AD135B1F-FF0E-4E8E-A6A8-70690F63C4D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,14 @@ Global
 		{BCD59BE1-093E-4745-9569-A7627BF09B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCD59BE1-093E-4745-9569-A7627BF09B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCD59BE1-093E-4745-9569-A7627BF09B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{668BC60E-E304-4D4A-A7E3-C2B1E3283B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{668BC60E-E304-4D4A-A7E3-C2B1E3283B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{668BC60E-E304-4D4A-A7E3-C2B1E3283B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{668BC60E-E304-4D4A-A7E3-C2B1E3283B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD135B1F-FF0E-4E8E-A6A8-70690F63C4D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD135B1F-FF0E-4E8E-A6A8-70690F63C4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD135B1F-FF0E-4E8E-A6A8-70690F63C4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD135B1F-FF0E-4E8E-A6A8-70690F63C4D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +62,8 @@ Global
 		{160794A6-DA61-4745-9AA8-D038736ABDE4} = {FF08E158-84C0-41AC-9180-47F3B8A0196C}
 		{4A91BEDF-4473-4C19-910A-13FF8BAF43A6} = {FF08E158-84C0-41AC-9180-47F3B8A0196C}
 		{BCD59BE1-093E-4745-9569-A7627BF09B5B} = {ED605932-0B4F-4EF1-A44F-1084A349841C}
+		{668BC60E-E304-4D4A-A7E3-C2B1E3283B0D} = {FF08E158-84C0-41AC-9180-47F3B8A0196C}
+		{AD135B1F-FF0E-4E8E-A6A8-70690F63C4D7} = {BC061F36-20BE-4033-98FF-01A53C3C54DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E091F2A-9801-4596-BBA9-754CD483BA7F}

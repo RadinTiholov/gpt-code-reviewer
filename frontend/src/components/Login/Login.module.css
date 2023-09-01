@@ -1,0 +1,35 @@
+.login-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: 1.2;
+    padding-inline: 6.4rem;
+
+    /* CENTER THE SECTION */
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+}
+
+.login-img {
+    max-width: 100%;
+}
+
+.form--login {
+    order: 2;
+    align-self: center;
+}
+
+@media (max-width: 950px) {
+    .login-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.2;
+        flex-direction: column;
+    }
+
+    .login-img {
+        display: none;
+    }
+}
